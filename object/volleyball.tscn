@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbwlv0inwkbrt"]
+
+[ext_resource type="Script" path="res://object/Volleyball.cs" id="1_iuhak"]
+[ext_resource type="Texture2D" uid="uid://clgs6acaitfra" path="res://assets/Pixel Adventure 1/Free/Items/Fruits/Collected.png" id="1_kks8u"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ikcs1"]
+
+[node name="RigidBody2D" type="RigidBody2D"]
+script = ExtResource("1_iuhak")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_ikcs1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.22222, 2.22222)
+texture = ExtResource("1_kks8u")
+region_enabled = true
+region_rect = Rect2(103, 7, 18, 18)
