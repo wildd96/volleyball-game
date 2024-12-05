@@ -30,7 +30,6 @@ public partial class MainCharacter : CharacterBody2D
 		UpdateMovement(ref velocity, delta);
 		UpdateAnimation(velocity);
 		UpdateFacing(velocity);
-		UpdateLineOpacity();
 
 		Velocity = velocity;
 		MoveAndSlide();
@@ -74,39 +73,19 @@ public partial class MainCharacter : CharacterBody2D
 		}
 	}
 
-	private void UpdateLine(float delta)
+	public Vector2 UpdateLine(float delta)
 	{
-		
-		if (_line == null || _ball == null)
-		{
-			GD.PrintErr($"Line is null: {_line == null}, Ball is null: {_ball == null}");
-			return;
-		}
-		
 		_line.ClearPoints();
-		//_line.AddPoint(GlobalPosition);
 
 		Vector2 playerPosition = GlobalPosition;
 		Vector2 ballPos = _ball.GlobalPosition;
-		//Vector2 ballVelocity = _ball.LinearVelocity;
 		Vector2 direction = (ballPos - playerPosition).Normalized();
 		
 		Vector2 extendedPoint = ballPos + direction * 100;
 		
 		_line.AddPoint(ballPos);
 		_line.AddPoint(extendedPoint);
-	}
-
-	private void UpdateLineOpacity()
-	{
-		float distance = _line.GlobalPosition.DistanceTo(GlobalPosition);
-		float opacity = 10f - Mathf.Clamp(distance / maxDistance, 0f, 1f);
-
-		// GD.Print(Mathf.Clamp(distance / maxDistance, 0f, 1f));
-		// GD.Print(distance/maxDistance);
-
-		// Color currentColor = _line.DefaultColor;
-		// currentColor.A = opacity;
-		// _line.DefaultColor = currentColor;
+		
+		return direction;
 	}
 }
